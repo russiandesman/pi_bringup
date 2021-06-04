@@ -1,0 +1,2 @@
+Content of this folder will be available on target under chroot.
+If you want to install something "manually" by untar'ing or by copying files to target's filesystem -- this is the right place to put your folders\archives\files

@@ -1,0 +1,7 @@
+
+enable_uart=1
+
+# Enable audio (loads snd_bcm2835)
+# Check whether this is really needed
+
+dtparam=audio=on
