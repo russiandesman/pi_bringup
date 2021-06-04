@@ -20,6 +20,9 @@ apt upgrade -y
 
 /tmp/files_to_install/RaspiWiFi/initial_setup_silent.py 
 
+# Enable SSH with password authentication
+systemctl enable ssh
+
 df -h # to know how many space left
 
 echo "-target_setup.sh------------------------"
