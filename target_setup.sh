@@ -18,6 +18,17 @@ update-locale LANG=en_US.UTF-8
 apt update
 apt upgrade -y
 
+df -h
+echo "installing pulseaudio"
+apt install -y pulseaudio
+
+df -h
+
+echo "installing vlc-bin"
+apt install -y vlc-bin
+
+df -h # to know how many space left
+
 /tmp/files_to_install/RaspiWiFi/initial_setup_silent.py 
 
 # Enable SSH with password authentication

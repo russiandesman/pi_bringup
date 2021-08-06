@@ -14,7 +14,7 @@ image_filename=output.img
 cp "2021-03-04-raspios-buster-armhf-lite.img" $image_filename
 
 # add free space to ext partition
-truncate --size=+500M $image_filename
+truncate --size=+1500M $image_filename
 growpart $image_filename 2
 
 #----mount image as real disk with partitions------------------
