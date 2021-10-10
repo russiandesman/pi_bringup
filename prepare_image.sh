@@ -6,12 +6,12 @@ rm -rf $WORKING_DIR/IMAGE
 mkdir -p $WORKING_DIR/IMAGE
 pushd $WORKING_DIR/IMAGE
 
-wget https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2021-03-25/2021-03-04-raspios-buster-armhf-lite.zip
-unzip 2021-03-04-raspios-buster-armhf-lite.zip
+wget https://downloads.raspberrypi.org/raspios_lite_armhf/images/raspios_lite_armhf-2021-05-28/2021-05-07-raspios-buster-armhf-lite.zip
+unzip 2021-05-07-raspios-buster-armhf-lite.zip
 
 image_filename=output.img
 
-cp "2021-03-04-raspios-buster-armhf-lite.img" $image_filename
+cp "2021-05-07-raspios-buster-armhf-lite.img" $image_filename
 
 # add free space to ext partition
 truncate --size=+1500M $image_filename
@@ -46,6 +46,11 @@ sudo mount --bind /dev     ./disk_content/ext/dev
 sudo mount --bind /dev/pts ./disk_content/ext/dev/pts
 sudo mount --bind /sys     ./disk_content/ext/sys
 sudo mount --bind /proc    ./disk_content/ext/proc
+# --------------------------------------------------------------
+# to be able to update kernel, you need your FAT partition mounted under /boot
+# but remember you are nt chrooted yet, so your root is ./disk_content/ext/
+sudo mount --bind ./disk_content/fat ./disk_content/ext/boot
+
 # little bit of street magic -- temporarily replace resolv.conf and ld.so.preload on target
 # take resolv conf from host, make sure ld.so.preload is empty (i.e. use canned empty version of it)
 sudo mount -o bind,ro /etc/resolv.conf ./disk_content/ext/etc/resolv.conf
@@ -65,6 +70,7 @@ sudo chroot ./disk_content/ext/ /usr/bin/env -i /target_setup.sh
 sudo rm ./disk_content/ext/usr/bin/qemu-arm-static
 sudo rm ./disk_content/ext/target_setup.sh
 
+sudo umount ./disk_content/ext/boot
 sudo umount ./disk_content/ext/tmp/files_to_install
 # nothing criminal if wasn't mounted
 sudo umount ./disk_content/ext/etc/ld.so.preload

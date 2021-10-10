@@ -15,4 +15,4 @@ sudo umount ${1}2
 sudo umount ${1}3
 sudo umount ${1}4
 
-sudo dd if=$WORKING_DIR/IMAGE/output.img of=${1} bs=4M
+sudo dd if=$WORKING_DIR/IMAGE/output.img of=${1} bs=4M status=progress

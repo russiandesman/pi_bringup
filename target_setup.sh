@@ -16,7 +16,7 @@ locale-gen
 update-locale LANG=en_US.UTF-8
 
 apt update
-apt upgrade -y
+apt full-upgrade -y
 
 df -h
 echo "installing pulseaudio"
